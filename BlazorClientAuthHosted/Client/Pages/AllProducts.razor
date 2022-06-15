@@ -1,0 +1,77 @@
+﻿@page "/allProducts"
+@attribute [Authorize]
+@inject IProductsService _productsService 
+@inject NavigationManager NavigationManager
+
+<h3 class="text-center">All Products</h3>
+
+@if (products.Count() == 0) { 
+    <p>Loading Products...</p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Category</th>
+                <th>Price</th>
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach(var product in products)
+                {
+                    <tr>
+                        <td>@product.Name</td>
+                        <td>@product.Description</td>
+                        <td>@product.Category</td>
+                        <td>@product.Cost</td>
+                        <td><button class="btn btn-primary" @onclick="(() => ShowProduct(product.Id.ToString()))">Show Details</button></td>
+                        <td><button class="btn btn-primary" @onclick="(() => UpdateProduct(product.Id.ToString()))">Update Product</button></td>
+                        <td><button class="btn btn-primary" @onclick="(() => DeleteProduct(product.Id.ToString()))">Delete Product</button></td>
+                    </tr>
+                }
+        </tbody>
+    </table>
+}
+
+@code {
+
+    private List<ProductModel> products = new List<ProductModel>();
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            products = await _productsService.GetProductModelsAsync();
+
+        }
+        catch (AccessTokenNotAvailableException exception)
+        {
+            exception.Redirect();
+        }
+    }
+
+    private void ShowProduct(string id)
+    {
+        NavigationManager.NavigateTo($"productDetails/{id}");
+    }
+
+    private async Task UpdateProduct(string id)
+    {
+        NavigationManager.NavigateTo($"updateProduct/{id}");
+    }
+
+    private async Task DeleteProduct(string id)
+    {
+        await _productsService.DeleteProductAsync(Guid.Parse(id));
+        products = await _productsService.GetProductModelsAsync();
+
+    }
+
+
+}

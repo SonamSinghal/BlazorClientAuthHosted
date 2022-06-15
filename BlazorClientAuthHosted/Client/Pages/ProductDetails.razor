@@ -1,0 +1,23 @@
+﻿@page "/productDetails/{id}"
+@using BlazorClientAuthHosted.Client.Services
+@using BlazorClientAuthHosted.Shared
+@inject IProductsService _productService
+
+<h3 class="text-center">Product Details</h3>
+<hr />
+
+<ProductDescriptionComponent Data=@product></ProductDescriptionComponent>
+
+@code {
+
+    [Parameter]
+    public string Id { get; set; }
+
+    private ProductModel product = new ProductModel();
+
+    protected override async Task OnInitializedAsync()
+    {
+        product = await _productService.ProductDetailsAsync(Guid.Parse(Id));
+    }
+
+}
