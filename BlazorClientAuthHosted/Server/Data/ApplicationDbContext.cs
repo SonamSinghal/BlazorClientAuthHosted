@@ -1,4 +1,5 @@
-﻿using BlazorClientAuthHosted.Shared;
+﻿using BlazorClientAuthHosted.Model;
+using BlazorClientAuthHosted.Shared;
 using BlazorClientAuthHosted.Shared;
 using IdentityServer4.EntityFramework.Options;
 using Microsoft.AspNetCore.ApiAuthorization.IdentityServer;
@@ -23,5 +24,9 @@ namespace BlazorClientAuthHosted.Server.Data
         public DbSet<ProductModel> Products { get; set; }
 
         public DbSet<UserModel> Users { get; set; }
+
+        public DbSet<CartItemsModel> CartItems { get; set; }
+
+        public DbSet<CheckoutModel> Checkout { get; set; }
     }
 }

@@ -31,6 +31,7 @@ namespace BlazorClientAuthHosted.Client
             builder.Services.AddScoped(sp => sp.GetRequiredService<IHttpClientFactory>().CreateClient("BlazorClientAuthHosted.ServerAPI"));
 
             builder.Services.AddScoped<IProductsService, ProductsService>();
+            builder.Services.AddScoped<ICheckoutService, CheckoutService>();
 
             builder.Services.AddApiAuthorization();
 

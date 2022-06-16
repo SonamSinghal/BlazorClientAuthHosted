@@ -49,6 +49,8 @@ namespace BlazorClientAuthHosted.Server
                 .AddIdentityServerJwt();
 
             services.AddScoped<IProductRepository, ProductRepository>();
+            services.AddScoped<ICartRepository, CartRepository>();
+            services.AddScoped<ICheckoutRepository, CheckoutRepository>();
 
             services.AddControllersWithViews();
             services.AddRazorPages();
