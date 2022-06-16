@@ -1,7 +1,8 @@
 ﻿@page "/createProduct"
-@attribute [Authorize]
+@attribute [Authorize(Policy ="IsAdmin")]
 @inject IProductsService _productsService
 @inject NavigationManager NavigationManager
+
 
 <h3>Create Product</h3>
 <hr />
@@ -51,6 +52,9 @@
 
     private ProductModel Product = new ProductModel();
 
+    private IList<string> Roles = new List<string>();
+
+    
     private async Task HandleSubmit()
     {
         await _productsService.CreateProductAsync(Product);

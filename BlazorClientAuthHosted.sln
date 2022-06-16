@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.32413.511
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorClientAuthHosted.Server", "BlazorClientAuthHosted\Server\BlazorClientAuthHosted.Server.csproj", "{16B12883-28FE-4501-A9E8-14AF85CD9565}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorClientAuthHosted.Server", "BlazorClientAuthHosted\Server\BlazorClientAuthHosted.Server.csproj", "{16B12883-28FE-4501-A9E8-14AF85CD9565}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorClientAuthHosted.Client", "BlazorClientAuthHosted\Client\BlazorClientAuthHosted.Client.csproj", "{8A2072AF-4A4E-428F-957E-9A20DC74A1B1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorClientAuthHosted.Client", "BlazorClientAuthHosted\Client\BlazorClientAuthHosted.Client.csproj", "{8A2072AF-4A4E-428F-957E-9A20DC74A1B1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorClientAuthHosted.Shared", "BlazorClientAuthHosted\Shared\BlazorClientAuthHosted.Shared.csproj", "{B98A1901-C51A-4E63-9807-7D972DA5292D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorClientAuthHosted.Shared", "BlazorClientAuthHosted\Shared\BlazorClientAuthHosted.Shared.csproj", "{B98A1901-C51A-4E63-9807-7D972DA5292D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

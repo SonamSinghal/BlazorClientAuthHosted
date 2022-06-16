@@ -85,11 +85,11 @@ namespace BlazorClientAuthHosted.Server.Areas.Identity.Pages.Account
             {
                 var user = new IdentityUser { UserName = Input.Email, Email = Input.Email };
                 var result = await _userManager.CreateAsync(user, Input.Password);
-                await _userManager.AddToRoleAsync(user, "Admin");
                 if (result.Succeeded)
                 {
-                    //await _userManager.AddToRoleAsync(user, "Member");
-                    
+                    //await _userManager.AddToRoleAsync(user, "Admin");
+                    await _userManager.AddToRoleAsync(user, "Member");
+
 
                     var user1 = new UserModel()
                     {
@@ -105,9 +105,6 @@ namespace BlazorClientAuthHosted.Server.Areas.Identity.Pages.Account
 
                     await _dbContext.Users.AddAsync(user1);
                     await _dbContext.SaveChangesAsync();
-
-                    await _userManager.AddToRoleAsync(user, "Member");
-                    //await _userManager.AddToRoleAsync(user, "Admin");
 
                     _logger.LogInformation("User created a new account with password.");
 

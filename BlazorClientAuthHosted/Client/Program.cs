@@ -22,6 +22,11 @@ namespace BlazorClientAuthHosted.Client
             builder.Services.AddHttpClient("BlazorClientAuthHosted.ServerAPI", client => client.BaseAddress = new Uri(builder.HostEnvironment.BaseAddress))
                 .AddHttpMessageHandler<BaseAddressAuthorizationMessageHandler>();
 
+            builder.Services.AddAuthorizationCore(options =>
+            {
+                options.AddPolicy("IsAdmin", policy => policy.RequireRole("Admin"));
+            });
+
             // Supply HttpClient instances that include access tokens when making requests to the server project
             builder.Services.AddScoped(sp => sp.GetRequiredService<IHttpClientFactory>().CreateClient("BlazorClientAuthHosted.ServerAPI"));
 
