@@ -1,0 +1,14 @@
+﻿@page "/checkout/{Id}"
+
+
+<h2 class="text-center">
+    Hi! Thanks for choosing AppStore. <br />
+    Your order has been placed with Order id <b>#@Id</b>
+</h2>
+
+
+@code {
+
+    [Parameter]
+    public string Id { get; set; }
+}

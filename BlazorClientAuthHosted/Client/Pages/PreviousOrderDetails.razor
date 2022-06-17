@@ -1,0 +1,24 @@
+﻿@page "/previousOrderDetails/{Id}"
+@inject ICheckoutService _checkoutService
+
+
+<h4 class="text-center">Order @Model.ReferenceId Details</h4>
+
+@foreach (var product in Model.Products)
+{
+    <CartItemComponent Model="product" />
+}
+
+@code {
+
+    [Parameter]
+    public string Id { get; set; }
+
+    private CheckoutModel Model = new CheckoutModel();
+
+    protected override async Task OnInitializedAsync()
+    {
+        Model = await _checkoutService.PreviousOrderDetails(Guid.Parse(Id));
+    }
+
+}

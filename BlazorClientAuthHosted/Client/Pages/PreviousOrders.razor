@@ -1,0 +1,30 @@
+﻿@page "/previousOrders"
+@inject ICheckoutService _checkoutService
+@inject NavigationManager NavigationManager
+
+@if (Items.Count() == 0)
+{
+    <h4 class="text-center">There are no Previous Orders!!</h4>
+}
+else
+{
+    <h3 class="text-center">Previous Orders</h3>
+
+    foreach (var item in Items)
+    {
+        <PreviousOrdersComponent Model="@item" />
+        <br/>
+    }
+}
+
+
+@code {
+
+    private List<CheckoutModel> Items = new List<CheckoutModel>();
+
+    protected override async Task OnInitializedAsync()
+    {
+        Items = await _checkoutService.PreviousListAsync();
+    }
+
+}

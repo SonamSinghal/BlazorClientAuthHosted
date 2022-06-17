@@ -7,7 +7,7 @@ namespace BlazorClientAuthHosted.Server.Repository
 {
     public interface ICartRepository
     {
-        Task AddItemToCartAsync(Guid productId);
+        Task<Guid> AddItemToCartAsync(Guid productId);
         void DeleteCartItem(Guid id);
         List<ProductModel> DisplayCartItems();
     }

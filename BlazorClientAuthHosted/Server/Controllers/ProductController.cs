@@ -38,7 +38,7 @@ namespace BlazorClientAuthHosted.Server.Controllers
         }
 
         [HttpPost("createProduct")]
-        [Authorize(Policy ="Admin")]
+        [Authorize(Roles ="Admin")]
         public async Task<IActionResult> CreateProduct(ProductModel product)
         {
             if (ModelState.IsValid)

@@ -1,0 +1,67 @@
+﻿@inject NavigationManager NavigationManager
+@inject IProductsService _productsService
+
+<AuthorizeView Roles="Admin">
+    <div class="card mb-4 shadow-sm" style="width: 18rem;">
+        <img src="" class="card-img-top">
+        <div class="card-body">
+            <h5 class="card-title">@Model.Name</h5>
+            <p class="card-text">@Model.Description</p>
+            <div class="row">
+                <div class="col-4">
+                    <a @onclick="(()=> ShowProduct(Model.Id.ToString()))" class="btn btn-sm btn-primary">View Details</a>
+                </div>
+                <div class="col-4">
+                    <a @onclick="(() => UpdateProduct(Model.Id.ToString()))" class="btn btn-sm btn-primary">Update Product</a>
+                </div>
+                <div class="col-4">
+                    <a @onclick="(() => DeleteProduct(Model.Id.ToString()))" class="btn btn-sm btn-primary">Delete Product</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</AuthorizeView>
+
+<AuthorizeView Roles="Member">
+    <div class="card mb-4 shadow-sm" style="width: 18rem;">
+        <img src="" class="card-img-top">
+        <div class="card-body">
+            <h5 class="card-title">@Model.Name</h5>
+            <p class="card-text">@Model.Description</p>
+            <div class="row">
+                <div class="col-4">
+                    <a @onclick="(()=> ShowProduct(Model.Id.ToString()))" class="btn btn-sm btn-primary">View Details</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</AuthorizeView>
+
+
+
+
+@code {
+
+    [Parameter]
+    public ProductModel Model { get; set; }
+
+    private IList<ProductModel> products = new List<ProductModel>();
+
+    private void ShowProduct(string id)
+    {
+        NavigationManager.NavigateTo($"productDetails/{id}");
+    }
+
+    private void UpdateProduct(string id)
+    {
+        NavigationManager.NavigateTo($"updateProduct/{id}");
+    }
+
+    private async Task DeleteProduct(string id)
+    {
+        await _productsService.DeleteProductAsync(Guid.Parse(id));
+        products = await _productsService.GetProductsAsync();
+
+    }
+
+}

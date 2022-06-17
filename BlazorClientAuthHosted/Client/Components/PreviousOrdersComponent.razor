@@ -1,0 +1,37 @@
+﻿@inject ICheckoutService _checkoutService
+@inject NavigationManager NavigationManager
+
+<section style="background-color: #eee;">
+    <div class="container">
+        <div>
+            <p class="text-decoration-underline align-content-md-start">
+                <b>Order Id:  @Model.ReferenceId</b>
+            </p>
+            <p class="align-content-md-end">
+                Orderd on @Model.OrderOn
+            </p>
+        </div>
+        <hr />
+        <div class="container">
+            <a @onclick="(()=>OrderDetails(Model.OrderId.ToString()))" class="btn btn-primary">View Details</a>
+        </div>
+        <br />
+    </div>
+
+</section>
+
+
+
+
+@code {
+
+    [Parameter]
+    public CheckoutModel Model { get; set; }
+
+    private async Task OrderDetails(string id)
+    {
+        await _checkoutService.PreviousOrderDetails(Guid.Parse(id));
+        NavigationManager.NavigateTo($"previousOrderDetails/{id}");
+    }
+
+}

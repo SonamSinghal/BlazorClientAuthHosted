@@ -29,7 +29,7 @@ namespace BlazorClientAuthHosted.Client.Services
             await _httpClient.DeleteAsync($"Product/deleteProduct/{id}");
         }
 
-        public async Task<List<ProductModel>> GetProductModelsAsync()
+        public async Task<List<ProductModel>> GetProductsAsync()
         {
             var data = await _httpClient.GetFromJsonAsync<List<ProductModel>>("Product/allProducts");
             return data;

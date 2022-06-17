@@ -25,32 +25,45 @@ namespace BlazorClientAuthHosted.Server.Controllers
         }
 
         //VIEW CART DATA
+        [HttpGet("viewCartItems")]
         public IActionResult ViewCartItems()
         {
             var data = _cartRepository.DisplayCartItems();
             return Ok(data);
         }
 
+        [HttpGet("addItemToCart/{id}")]
         public async Task<IActionResult> AddProductToCart(Guid id)
         {
-            await _cartRepository.AddItemToCartAsync(id);
-            return Ok("ViewCartItems", "User");
+            var cartId = await _cartRepository.AddItemToCartAsync(id);
+            return Ok(cartId);
+        }
+
+        [HttpDelete("deleteCartItem/{id}")]
+        public IActionResult DeleteCartProduct(Guid id)
+        {
+            _cartRepository.DeleteCartItem(id);
+            return Ok();
         }
 
 
         //------------------CHECKOUT--------------------------------//
+        [HttpGet("checkout")]
         public IActionResult Checkout()
         {
             var orderId = _checkoutRepository.CheckoutProcess();
-            return Ok(orderId);
+            orderId = orderId.Remove(0, 1);
+            return Ok(orderId); //ON17062022....
         }
 
+        [HttpGet("previousOrderList")]
         public IActionResult PreviousOrders()
         {
             var data = _checkoutRepository.PreviousOrdersList();
             return Ok(data);
         }
 
+        [HttpGet("previousOrderDetails/{id}")]
         public IActionResult PreviousOrderDetails(Guid id)
         {
             var data = _checkoutRepository.PreviousOrderDetails(id);

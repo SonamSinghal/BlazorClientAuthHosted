@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace BlazorClientAuthHosted.Server.Repository
 {
-    public interface ICheckoutRepository
+    public interface ICheckoutRepository1
     {
         string CheckoutProcess();
         CheckoutModel PreviousOrderDetails(Guid orderId);

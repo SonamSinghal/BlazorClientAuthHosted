@@ -6,7 +6,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace BlazorClientAuthHosted.Model
+namespace BlazorClientAuthHosted.Shared
 {
     public class CartItemsModel
     {

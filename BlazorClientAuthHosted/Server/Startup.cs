@@ -10,6 +10,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 
 namespace BlazorClientAuthHosted.Server
@@ -41,9 +42,12 @@ namespace BlazorClientAuthHosted.Server
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
             services.AddIdentityServer()
-                .AddApiAuthorization<IdentityUser, ApplicationDbContext>();
-
-            
+                .AddApiAuthorization<IdentityUser, ApplicationDbContext>(opt =>
+                {
+                    opt.IdentityResources["openid"].UserClaims.Add("role");
+                    opt.ApiResources.Single().UserClaims.Add("role");
+                });
+                        JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Remove("role");
 
             services.AddAuthentication()
                 .AddIdentityServerJwt();

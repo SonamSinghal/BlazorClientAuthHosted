@@ -1,0 +1,43 @@
+﻿@page "/cartItems"
+@inject ICartService _cartService
+@inject ICheckoutService _checkoutService 
+@inject NavigationManager NavigationManager
+
+@if (Items.Count == 0)
+{
+    <h4 class="text-center">Your cart is Empty!</h4>
+}
+
+else
+{
+    <h3 class="text-center">Cart</h3>
+
+    @foreach (var item in Items)
+    {
+        <CartItemComponent Model="item" />
+        <br />
+    }
+
+    <div class="container">
+        <a @onclick="(()=> Checkout())" class="btn btn-success">Checkout</a>
+    </div>
+}
+
+
+@code {
+
+    private IList<ProductModel> Items = new List<ProductModel>();
+
+    protected override async Task OnInitializedAsync()
+    {
+        Items = await _cartService.ViewCartItemsAsync();
+    }
+
+    private async Task Checkout()
+    {
+        var orderId = await _checkoutService.InitiateCheckoutAsync();
+        orderId = orderId.Remove(0, 1);
+        NavigationManager.NavigateTo($"checkout/{orderId}");
+    }
+
+}

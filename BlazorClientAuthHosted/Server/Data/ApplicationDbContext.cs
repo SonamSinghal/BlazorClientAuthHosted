@@ -1,6 +1,4 @@
-﻿using BlazorClientAuthHosted.Model;
-using BlazorClientAuthHosted.Shared;
-using BlazorClientAuthHosted.Shared;
+﻿using BlazorClientAuthHosted.Shared;
 using IdentityServer4.EntityFramework.Options;
 using Microsoft.AspNetCore.ApiAuthorization.IdentityServer;
 using Microsoft.AspNetCore.Identity;

@@ -1,5 +1,4 @@
-﻿using BlazorClientAuthHosted.Model;
-using BlazorClientAuthHosted.Server.Data;
+﻿using BlazorClientAuthHosted.Server.Data;
 using BlazorClientAuthHosted.Shared;
 using Microsoft.AspNetCore.Http;
 using System;
@@ -23,16 +22,17 @@ namespace BlazorClientAuthHosted.Server.Repository
         }
 
         //ADD ITEMS TO CART
-        public async Task AddItemToCartAsync(Guid productId)
+        public async Task<Guid> AddItemToCartAsync(Guid productId)
         {
 
             var cartItem = _userContext.CartItems.SingleOrDefault(x => x.ProductId == productId);
+            var Id = Guid.NewGuid();
 
             if (cartItem == null)
             {
                 cartItem = new CartItemsModel()
                 {
-                    Id = Guid.NewGuid(),
+                    Id = Id,
                     UserId = Guid.Parse(_httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier)),
                     ProductId = productId,
 
@@ -41,11 +41,13 @@ namespace BlazorClientAuthHosted.Server.Repository
                 await _userContext.CartItems.AddAsync(cartItem);
                 await _userContext.SaveChangesAsync();
 
+                return Id;
             }
             else
             {
                 cartItem.Quantity++;
                 await _userContext.SaveChangesAsync();
+                return productId;
             }
         }
 

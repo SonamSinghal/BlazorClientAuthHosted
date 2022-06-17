@@ -1,5 +1,5 @@
-﻿using BlazorClientAuthHosted.Model;
-using BlazorClientAuthHosted.Server.Data;
+﻿using BlazorClientAuthHosted.Server.Data;
+using BlazorClientAuthHosted.Shared;
 using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;

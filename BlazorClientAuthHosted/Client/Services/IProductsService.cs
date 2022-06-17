@@ -7,7 +7,7 @@ namespace BlazorClientAuthHosted.Client.Services
 {
     public interface IProductsService
     {
-        Task<List<ProductModel>> GetProductModelsAsync();
+        Task<List<ProductModel>> GetProductsAsync();
         Task<ProductModel> ProductDetailsAsync(Guid id);
         Task<ProductModel> CreateProductAsync(ProductModel product);
         Task<ProductModel> UpdateProductAsync(Guid id, ProductModel product);
